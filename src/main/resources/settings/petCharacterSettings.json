@@ -1,0 +1,37 @@
+{
+  "Utka":
+  {
+    "petName":"Utka",
+    "youngTexturePath":"sprites/characters/Utka-J.png",
+    "adultTexturePath":"sprites/characters/Utka-A.png",
+    "mealName":"Bread",
+    "mealTexturePath":"sprites/meal/meal.png"
+  },
+
+  "Flower":
+  {
+    "petName":"Flower",
+    "youngTexturePath":"sprites/characters/Flower-J.png",
+    "adultTexturePath":"sprites/characters/Flower-A.png",
+    "mealName":"Meat",
+    "mealTexturePath":"sprites/meal/meal.png"
+  },
+
+  "Luk":
+  {
+    "petName":"Luk",
+    "youngTexturePath":"sprites/characters/Luk-J.png",
+    "adultTexturePath":"sprites/characters/Luk-A.png",
+    "mealName":"Carrot",
+    "mealTexturePath":"sprites/meal/meal.png"
+  },
+
+  "Bill":
+  {
+    "petName":"Bill",
+    "youngTexturePath":"sprites/characters/Bill-J.png",
+    "adultTexturePath":"sprites/characters/Bill-A.png",
+    "mealName":"Cake",
+    "mealTexturePath":"sprites/meal/meal.png"
+  }
+}
