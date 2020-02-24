@@ -15,16 +15,10 @@ public class SleepCommand extends Command {
 
     @Override
     public void execute() {
-        ModelContainer.getPetInstance().setDead(true);
         ViewContainer.getStatusLabel().setText(
                 ModelContainer.getPetInstance().getCurrentOccupation().getStatusMessage());
 
         MotionAnimation motionAnimation = new MotionAnimation();
-        SpriteAnimation mealTexture = ModelContainer.getMealViewInstance().getMealAnimation();
-        mealTexture.setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
-                .getSpriteAnimationSetting("blank"));
-        mealTexture.play();
-
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
                 .getSpriteAnimationSetting("sleep"));

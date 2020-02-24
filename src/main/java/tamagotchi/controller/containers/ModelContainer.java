@@ -2,6 +2,7 @@ package tamagotchi.controller.containers;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import tamagotchi.PropertiesAccessPoint;
 import tamagotchi.model.meal.Meal;
 import tamagotchi.model.meal.MealView;

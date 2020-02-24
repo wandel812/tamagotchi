@@ -18,7 +18,6 @@ public class SpriteAnimation extends TransitionWithTexture {
 
     public SpriteAnimation(String imgPath, double durationInMillis, int frameCount, int offsetX, int offsetY,
                            int height, int width) {
- //      this.spriteImgPath = spriteImgPath;
         super(new ImageView(imgPath));
         this.frameCnt = frameCount;
         this.offsetX = offsetX;
@@ -27,6 +26,7 @@ public class SpriteAnimation extends TransitionWithTexture {
         this.height = height;
         this.durationInMillis = durationInMillis;
         setCycleDuration(new Duration(durationInMillis));
+        getTexture().setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 
         setInterpolator(new Interpolator() {
             @Override
@@ -68,7 +68,6 @@ public class SpriteAnimation extends TransitionWithTexture {
 
     protected void interpolate(double k) {
         final int index = (int) (k * 10);
-        //System.out.println(index);
         final int x = index * width + offsetX;
         final int y = offsetY;
         getTexture().setViewport(new Rectangle2D(x, y, width, height));
@@ -81,9 +80,4 @@ public class SpriteAnimation extends TransitionWithTexture {
     public void setDurationInMillis(double durationInMillis) {
         this.durationInMillis = durationInMillis;
     }
-
-    /*  public String getSpriteImgPath() {
-        return spriteImgPath;
-    }*/
-
 }

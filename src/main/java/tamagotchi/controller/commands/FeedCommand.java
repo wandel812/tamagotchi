@@ -40,16 +40,14 @@ public class FeedCommand extends Command {
                     ModelContainer.getPetViewInstance().setPetPosition(pointTo);
                     petTexture.setOtherAnimation(
                             spriteAnimationSettings.getSpriteAnimationSetting("eat"));
-                    mealTexture.setOnFinished(
-                            actionEvent1 -> {
-                                mealTexture.setOtherAnimation(
-                                        spriteAnimationSettings.getSpriteAnimationSetting("blank"));
-                                ViewContainer.getStatusLabel().setText(
-                                        ModelContainer.getPetInstance().getCurrentOccupation().getStatusMessage());
-                                mealTexture.play();
-                            });
                     mealTexture.play();
-                    motionAnimation.stayAnimation(Controller::controlCommandExecution);
+
+                    motionAnimation.stayAnimation(actionEvent1 -> {
+                        mealTexture.setOtherAnimation(
+                                spriteAnimationSettings.getSpriteAnimationSetting("blank"));
+                        mealTexture.play();
+                        Controller.controlCommandExecution(actionEvent1);
+                    });
                 });
     }
 }

@@ -11,7 +11,7 @@ public abstract class TransitionWithTexture extends Transition {
     public TransitionWithTexture(ImageView texture) {
         super();
         this.texture = texture;
-        getTexture().setViewport(new Rectangle2D(0, 0, 0, 0));
+        this.texture.setViewport(new Rectangle2D(0, 0, 0, 0));
     }
 
     public ImageView getTexture() {

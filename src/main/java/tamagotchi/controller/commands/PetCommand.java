@@ -27,10 +27,6 @@ public class PetCommand extends Command {
         );
 
         SpriteAnimationSettings spriteAnimationSettings = SpriteAnimationSettings.getAnimationSettingsInstance();
-        SpriteAnimation mealTexture = ModelContainer.getMealViewInstance().getMealAnimation();
-        mealTexture.setOtherAnimation(spriteAnimationSettings.getSpriteAnimationSetting("blank"));
-        mealTexture.play();
-
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(spriteAnimationSettings.getSpriteAnimationSetting("walk"));
         motionAnimation.setTransitionWithTexture(petTexture);

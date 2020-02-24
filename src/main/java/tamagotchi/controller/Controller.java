@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tamagotchi.PropertiesAccessPoint;
 import tamagotchi.controller.commands.*;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
@@ -41,10 +42,10 @@ public class Controller {
         Command command;
         if (ModelContainer.getPetInstance().getCurrentOccupation().equals(Occupation.DIEING)) {
             command = new DieCommand();
-        } else if (ModelContainer.getPetInstance().getCurrentOccupation().equals(Occupation.SLEEPING)) {
-            command = new SleepCommand();
         } else if (!commandQueue.isEmpty()) {
             command = commandQueue.poll();
+        } else if (ModelContainer.getPetInstance().getCurrentOccupation().equals(Occupation.SLEEPING)) {
+            command = new SleepCommand();
         } else {
             command = new WalkAroundCommand();
         }
@@ -113,7 +114,10 @@ public class Controller {
         ProgressBarProperties.setTiredness(ModelContainer.getPetInstance().getTiredness());
 
         timer = new Timer();
-        timer.schedule(new UpdatePetStateTimerTask(), 5000, 5000);
+        timer.schedule(
+                new UpdatePetStateTimerTask(),
+                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")),
+                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")));
         controlCommandExecution(null);
     }
 }
