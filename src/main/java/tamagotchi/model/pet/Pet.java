@@ -11,6 +11,7 @@ public class Pet {
     private int hungriness;
     private boolean isAdult;
     private boolean isDead;
+    private boolean isSleeping;
 
     public Pet(String name, int communication, int tiredness, int hungriness) {
         this.name = name;
@@ -23,29 +24,41 @@ public class Pet {
         Occupation curPetOccupation;
         if (hungriness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
                 "dieingHungrinessThreshold"))) {
+            isSleeping = false;
             curPetOccupation = Occupation.DIEING;
-        } else if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "sleepingTirednessThreshold"))) {
-            curPetOccupation = Occupation.SLEEPING;
         } else if (hungriness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
                 "hungrinessThreshold"))) {
+            isSleeping = false;
+            isDead = true;
             curPetOccupation = Occupation.BEING_HUNGRY;
         } else if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "tirednessForSleepThreshold"))) {
+                "sleepingTirednessThreshold"))) {
+            isSleeping = true;
             curPetOccupation = Occupation.SLEEPING;
-        } else if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "tirednessThreshold"))
-                && communication < Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "communicationThreshold"))) {
-            curPetOccupation = Occupation.BEING_ANGRY;
-        } else if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "tirednessThreshold"))) {
-            curPetOccupation = Occupation.BEING_TIRED;
-        } else if (communication < Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "communicationThreshold"))) {
-            curPetOccupation = Occupation.BEING_SAD;
         } else {
-            curPetOccupation = Occupation.BEING_HAPPY;
+            if (isSleeping && tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
+                    "wakingUpThreshold"))) {
+                curPetOccupation = Occupation.SLEEPING;
+                isSleeping = true;
+            } else {
+                if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
+                        "tirednessThreshold"))
+                        && communication < Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
+                        "communicationThreshold"))) {
+                    curPetOccupation = Occupation.BEING_ANGRY;
+                } else {
+                    isSleeping = false;
+                    if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
+                            "tirednessThreshold"))) {
+                        curPetOccupation = Occupation.BEING_TIRED;
+                    } else if (communication < Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
+                            "communicationThreshold"))) {
+                        curPetOccupation = Occupation.BEING_SAD;
+                    } else {
+                        curPetOccupation = Occupation.BEING_HAPPY;
+                    }
+                }
+            }
         }
         return curPetOccupation;
     }
@@ -66,8 +79,10 @@ public class Pet {
     }
 
     public void tirednessUpdate() {
-        alterTirednessBy(Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
-                "actionTirednessUpdate")));
+        alterTirednessBy(
+                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("actionTirednessUpdate"))
+                        - Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickTirednessUpdate"))
+        );
     }
 
     public void communicationUpdate() {

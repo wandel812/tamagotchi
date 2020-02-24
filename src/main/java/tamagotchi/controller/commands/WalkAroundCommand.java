@@ -9,7 +9,6 @@ import tamagotchi.view.animation.sprite.settings.SpriteAnimationSettings;
 import tamagotchi.controller.Controller;
 import tamagotchi.model.pet.Occupation;
 
-import javax.swing.text.View;
 import java.util.Random;
 
 public class WalkAroundCommand extends Command {
@@ -23,7 +22,6 @@ public class WalkAroundCommand extends Command {
         ViewContainer.getStatusLabel().setText(ModelContainer.getPetInstance()
                 .getCurrentOccupation().getStatusMessage());
         Random rnd = new Random();
-        MotionAnimation motionAnimation = new MotionAnimation();
         Point2D goToPoint = new Point2D(
                 rnd.nextInt(GAME_AREA_HEIGHT - 2 * GAME_AREA_MARGIN_HEIGHT) + GAME_AREA_MARGIN_HEIGHT,
                 rnd.nextInt(GAME_AREA_WIDTH - 2 * GAME_AREA_MARGIN_WIDTH) + GAME_AREA_MARGIN_HEIGHT
@@ -33,8 +31,8 @@ public class WalkAroundCommand extends Command {
 
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(spriteAnimationSettings.getSpriteAnimationSetting("walk"));
-        motionAnimation.setTransitionWithTexture(petTexture);
-        motionAnimation.moveToAnimation(
+        getMotionAnimation().setTransitionWithTexture(petTexture);
+        getMotionAnimation().moveToAnimation(
                 ModelContainer.getPetViewInstance().getPetPosition(),
                 goToPoint,
                 actionEvent -> {
@@ -42,8 +40,8 @@ public class WalkAroundCommand extends Command {
                     ModelContainer.getPetViewInstance().setPetPosition(goToPoint);
                     petTexture.setOtherAnimation(
                             spriteAnimationSettings.getSpriteAnimationSetting(petOccupation.getAnimationName()));
-                    motionAnimation.setTransitionWithTexture(petTexture);
-                    motionAnimation.stayAnimation(Controller::controlCommandExecution);
+                    getMotionAnimation().setTransitionWithTexture(petTexture);
+                    getMotionAnimation().stayAnimation(Controller::controlCommandExecution);
                 });
     }
 }

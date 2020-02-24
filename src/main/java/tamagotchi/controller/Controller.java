@@ -1,7 +1,6 @@
 package tamagotchi.controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -10,7 +9,8 @@ import tamagotchi.PropertiesAccessPoint;
 import tamagotchi.controller.commands.*;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
-import tamagotchi.controller.timer.tasks.UpdatePetStateTimerTask;
+import tamagotchi.controller.timer.GameTimers;
+import tamagotchi.controller.timer.tasks.GeneralPetStateUpdateTimerTask;
 import tamagotchi.model.pet.Occupation;
 import tamagotchi.view.Content;
 import tamagotchi.view.ProgressBarProperties;
@@ -109,15 +109,13 @@ public class Controller {
                 ModelContainer.getMealViewInstance().getMealAnimation().getTexture());
         ViewContainer.getStatusLabel().setText(ModelContainer.getPetInstance()
                 .getCurrentOccupation().getStatusMessage());
+        GameTimers.getInstance().getGeneralPetStateUpdateGameTimer().startTimer(
+                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")),
+                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan"))
+        );
         ProgressBarProperties.setCommunication(ModelContainer.getPetInstance().getCommunication());
         ProgressBarProperties.setHungriness(ModelContainer.getPetInstance().getHungriness());
         ProgressBarProperties.setTiredness(ModelContainer.getPetInstance().getTiredness());
-
-        timer = new Timer();
-        timer.schedule(
-                new UpdatePetStateTimerTask(),
-                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")),
-                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")));
         controlCommandExecution(null);
     }
 }

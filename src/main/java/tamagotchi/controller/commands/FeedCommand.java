@@ -16,12 +16,11 @@ public class FeedCommand extends Command {
     @Override
     public void execute() {
         ViewContainer.getStatusLabel().setText("I'm going to eat");
-        MotionAnimation motionAnimation = new MotionAnimation();
 
         SpriteAnimationSettings spriteAnimationSettings = SpriteAnimationSettings.getAnimationSettingsInstance();
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(spriteAnimationSettings.getSpriteAnimationSetting("walk"));
-        motionAnimation.setTransitionWithTexture(petTexture);
+        getMotionAnimation().setTransitionWithTexture(petTexture);
 
         SpriteAnimation mealTexture = ModelContainer.getMealViewInstance().getMealAnimation();
         mealTexture.setOtherAnimation(
@@ -33,7 +32,7 @@ public class FeedCommand extends Command {
                 spriteAnimationSettings.getSpriteAnimationSetting(ModelContainer.getMealInstance()
                         .getMealType().name().toLowerCase()).getWidth(),
                 0);
-        motionAnimation.moveToAnimation(
+        getMotionAnimation().moveToAnimation(
                 ModelContainer.getPetViewInstance().getPetPosition(),
                 pointTo,
                 actionEvent -> {
@@ -42,7 +41,7 @@ public class FeedCommand extends Command {
                             spriteAnimationSettings.getSpriteAnimationSetting("eat"));
                     mealTexture.play();
 
-                    motionAnimation.stayAnimation(actionEvent1 -> {
+                    getMotionAnimation().stayAnimation(actionEvent1 -> {
                         mealTexture.setOtherAnimation(
                                 spriteAnimationSettings.getSpriteAnimationSetting("blank"));
                         mealTexture.play();

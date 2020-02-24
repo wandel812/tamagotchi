@@ -19,7 +19,6 @@ public class PetCommand extends Command {
     @Override
     public void execute() {
         ViewContainer.getStatusLabel().setText("Play! Play! Play!");
-        MotionAnimation motionAnimation = new MotionAnimation();
         Random rnd = new Random();
         Point2D goToPoint = new Point2D(
                 rnd.nextInt(GAME_AREA_HEIGHT - 2 * GAME_AREA_MARGIN_HEIGHT) + GAME_AREA_MARGIN_HEIGHT,
@@ -29,20 +28,20 @@ public class PetCommand extends Command {
         SpriteAnimationSettings spriteAnimationSettings = SpriteAnimationSettings.getAnimationSettingsInstance();
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(spriteAnimationSettings.getSpriteAnimationSetting("walk"));
-        motionAnimation.setTransitionWithTexture(petTexture);
-        motionAnimation.moveToAnimation(
+        getMotionAnimation().setTransitionWithTexture(petTexture);
+        getMotionAnimation().moveToAnimation(
                 ModelContainer.getPetViewInstance().getPetPosition(),
                 goToPoint,
                 actionEvent -> {
                     ModelContainer.getPetViewInstance().setPetPosition(goToPoint);
                     petTexture.setOtherAnimation(
                             spriteAnimationSettings.getSpriteAnimationSetting("beStill"));
-                    motionAnimation.setTransitionWithTexture(petTexture);
-                    motionAnimation.stayAnimation(actionEvent1 -> {
+                    getMotionAnimation().setTransitionWithTexture(petTexture);
+                    getMotionAnimation().stayAnimation(actionEvent1 -> {
                         petTexture.setOtherAnimation(
                                 spriteAnimationSettings.getSpriteAnimationSetting("jump"));
-                        motionAnimation.setTransitionWithTexture(petTexture);
-                        motionAnimation.stayAnimation(Controller::controlCommandExecution);
+                        getMotionAnimation().setTransitionWithTexture(petTexture);
+                        getMotionAnimation().stayAnimation(Controller::controlCommandExecution);
                     });
                 });
     }

@@ -18,19 +18,17 @@ public class DieCommand extends Command {
         ViewContainer.getStatusLabel().setText(
                 ModelContainer.getPetInstance().getCurrentOccupation().getStatusMessage());
 
-        MotionAnimation motionAnimation = new MotionAnimation();
-
         SpriteAnimation petTexture = ModelContainer.getPetViewInstance().getPetAnimation();
         petTexture.setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
                 .getSpriteAnimationSetting("die"));
-        motionAnimation.setTransitionWithTexture(petTexture);
-        motionAnimation.stayAnimation(
+        getMotionAnimation().setTransitionWithTexture(petTexture);
+        getMotionAnimation().stayAnimation(
                 actionEvent -> {
                     petTexture.setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
                             .getSpriteAnimationSetting("goToBetterWorld"));
-                    motionAnimation.setTransitionWithTexture(petTexture);
+                    getMotionAnimation().setTransitionWithTexture(petTexture);
                     Point2D heavenPoint = new Point2D(GAME_AREA_MARGIN_WIDTH, GAME_AREA_MARGIN_HEIGHT);
-                    motionAnimation.moveToAnimation(ModelContainer.getPetViewInstance().getPetPosition(),
+                    getMotionAnimation().moveToAnimation(ModelContainer.getPetViewInstance().getPetPosition(),
                             heavenPoint, null);
                 });
     }
