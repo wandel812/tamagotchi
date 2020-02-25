@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tamagotchi.controller.Controller;
 import tamagotchi.controller.containers.ViewContainer;
+import tamagotchi.data.FileSystemForURI;
 import tamagotchi.view.stage.content.RootPane;
 
 public class TamagotchiApp extends Application {

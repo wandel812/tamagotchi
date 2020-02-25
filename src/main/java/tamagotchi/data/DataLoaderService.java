@@ -2,25 +2,23 @@ package tamagotchi.data;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
+import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.Map;
 import java.util.Properties;
 
 public class DataLoaderService {
     public static Map getDataFromJson(String path) throws IOException, URISyntaxException {
-        Path inputPath = Paths.get(DataLoaderService.class.getResource(path).toURI());
-        Reader in = Files.newBufferedReader(inputPath);
-
-        Gson gson = new Gson();
-        Map data = gson.fromJson(new JsonReader(in), Map.class);
-        in.close();
+        InputStream resource = new ClassPathResource(path).getInputStream();
+        Map data = null;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(resource))) {
+            Gson gson = new Gson();
+            data = gson.fromJson(new JsonReader(in), Map.class);
+        }
         return data;
     }
 

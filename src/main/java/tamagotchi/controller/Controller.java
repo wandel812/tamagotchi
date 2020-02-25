@@ -4,12 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.stage.WindowEvent;
+import org.springframework.util.ResourceUtils;
 import tamagotchi.controller.commands.*;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
 import tamagotchi.controller.game.GameService;
 import tamagotchi.controller.timer.GameTimers;
-import tamagotchi.data.DataLoaderService;
 import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.data.saving.AppStateDto;
 import tamagotchi.data.saving.SavingLoadingService;
@@ -19,7 +19,6 @@ import tamagotchi.view.stage.PetChoosingStage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -106,10 +105,12 @@ public class Controller {
     public static final EventHandler<WindowEvent> onClosed = windowEvent -> {
         if (Controller.isInCommandCycle()) {
             try {
-                Path path = Paths.get(DataLoaderService.class.getResource(
-                        PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile")).toURI());
-                Files.deleteIfExists(path);
-                File file = Files.createFile(path).toFile();
+                File file = ResourceUtils.getFile("classpath:"
+                        + PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
+                if (file.exists()) {
+                    file.delete();
+                    file.createNewFile();
+                }
                 SavingLoadingService.saveToFle(
                         file,
                         new AppStateDto(
@@ -125,7 +126,7 @@ public class Controller {
                                         .getLastTaskStartDate().getTime()
                         ));
 
-            } catch (IOException | URISyntaxException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
