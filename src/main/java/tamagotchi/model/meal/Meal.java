@@ -1,12 +1,5 @@
 package tamagotchi.model.meal;
 
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-import tamagotchi.PropertiesAccessPoint;
-import tamagotchi.view.animation.sprite.SpriteAnimation;
-import tamagotchi.view.animation.sprite.settings.SpriteAnimationSettings;
-import tamagotchi.model.pet.Pet;
-
 public class Meal {
     private MealType mealType;
 

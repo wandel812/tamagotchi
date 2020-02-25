@@ -1,12 +1,16 @@
 package tamagotchi.view.animation;
 
 import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 
 
 public abstract class TransitionWithTexture extends Transition {
     private ImageView texture;
+
+    public TransitionWithTexture() {
+    }
 
     public TransitionWithTexture(ImageView texture) {
         super();

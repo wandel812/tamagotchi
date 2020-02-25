@@ -3,8 +3,6 @@ package tamagotchi.controller.timer.tasks;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.view.ProgressBarProperties;
 
-import java.util.Calendar;
-
 public class GeneralPetStateUpdateTimerTask extends UpdateTimerTask {
 
     @Override
@@ -14,5 +12,6 @@ public class GeneralPetStateUpdateTimerTask extends UpdateTimerTask {
         ProgressBarProperties.setCommunication(ModelContainer.getPetInstance().getCommunication());
         ProgressBarProperties.setHungriness(ModelContainer.getPetInstance().getHungriness());
         ProgressBarProperties.setTiredness(ModelContainer.getPetInstance().getTiredness());
+        System.out.println("tickupdate");
     }
 }

@@ -3,7 +3,7 @@ package tamagotchi.controller.commands;
 import javafx.geometry.Point2D;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
-import tamagotchi.view.animation.motion.MotionAnimation;
+import tamagotchi.controller.game.GameService;
 import tamagotchi.view.animation.sprite.SpriteAnimation;
 import tamagotchi.view.animation.sprite.settings.SpriteAnimationSettings;
 
@@ -25,11 +25,12 @@ public class DieCommand extends Command {
         getMotionAnimation().stayAnimation(
                 actionEvent -> {
                     petTexture.setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
-                            .getSpriteAnimationSetting("goToBetterWorld"));
+                            .getSpriteAnimationSetting("goToBetterPlace"));
                     getMotionAnimation().setTransitionWithTexture(petTexture);
                     Point2D heavenPoint = new Point2D(GAME_AREA_MARGIN_WIDTH, GAME_AREA_MARGIN_HEIGHT);
                     getMotionAnimation().moveToAnimation(ModelContainer.getPetViewInstance().getPetPosition(),
                             heavenPoint, null);
+                    GameService.stopGame();
                 });
     }
 }

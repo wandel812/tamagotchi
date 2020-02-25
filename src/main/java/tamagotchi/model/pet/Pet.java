@@ -1,10 +1,13 @@
 package tamagotchi.model.pet;
 
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.model.meal.MealType;
 import tamagotchi.model.pet.settings.PetSettings;
 
-public class Pet {
+import java.io.Serializable;
+
+public class Pet implements Serializable {
+    private static final long serialVersionUID = 2216574448288194471L;
     private String name;
     private int communication;
     private int tiredness;
@@ -25,11 +28,11 @@ public class Pet {
         if (hungriness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
                 "dieingHungrinessThreshold"))) {
             isSleeping = false;
+            isDead = true;
             curPetOccupation = Occupation.DIEING;
         } else if (hungriness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
                 "hungrinessThreshold"))) {
             isSleeping = false;
-            isDead = true;
             curPetOccupation = Occupation.BEING_HUNGRY;
         } else if (tiredness > Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty(
                 "sleepingTirednessThreshold"))) {
@@ -142,6 +145,30 @@ public class Pet {
 
     public void setDead(boolean dead) {
         isDead = dead;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCommunication(int communication) {
+        this.communication = communication;
+    }
+
+    public void setTiredness(int tiredness) {
+        this.tiredness = tiredness;
+    }
+
+    public void setHungriness(int hungriness) {
+        this.hungriness = hungriness;
+    }
+
+    public boolean isSleeping() {
+        return isSleeping;
+    }
+
+    public void setSleeping(boolean sleeping) {
+        isSleeping = sleeping;
     }
 }
 

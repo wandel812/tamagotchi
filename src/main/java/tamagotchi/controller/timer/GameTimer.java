@@ -4,10 +4,11 @@ import tamagotchi.controller.timer.tasks.PetSleepingUpdateTimerTask;
 import tamagotchi.controller.timer.tasks.UpdateTimerTask;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameTimer {
+    private boolean isActive = false;
     private Timer timer;
     private UpdateTimerTask timerTask;
 
@@ -15,36 +16,40 @@ public class GameTimer {
         this.timerTask = timerTask;
     }
 
-    public void startTimer(long delay, long period) {
-        timerTask.setLastTaskStartDate(Calendar.getInstance().getTime());
+    private void init() {
+        isActive = true;
         timer = new Timer();
+        timerTask.setLastTaskStartDate(Calendar.getInstance().getTime());
+    }
+
+    public void startTimer(long delay, long period) {
+        init();
         timer.schedule(timerTask, delay, period);
+    }
+
+    public void startTimer(long delay) {
+        init();
+        timer.schedule(timerTask, delay);
     }
 
     public long stopTimer() {
         long remainDurationInMillis
                 = this.timerTask.getLastTaskStartDate().getTime() - Calendar.getInstance().getTime().getTime();
-
         timer.cancel();
         timer.purge();
+        isActive = false;
         timerTask = new PetSleepingUpdateTimerTask();
         return remainDurationInMillis;
 
     }
 
-    public Timer getTimer() {
-        return timer;
+    public void stopTimerIfActive() {
+        if (isActive) {
+            stopTimer();
+        }
     }
 
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
-    public TimerTask getTimerTask() {
-        return timerTask;
-    }
-
-    public void setTimerTask(UpdateTimerTask timerTask) {
-        this.timerTask = timerTask;
+    public Date getLastTaskStartDate() {
+        return timerTask.getLastTaskStartDate();
     }
 }

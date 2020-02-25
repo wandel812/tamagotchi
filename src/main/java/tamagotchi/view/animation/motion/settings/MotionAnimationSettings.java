@@ -1,7 +1,7 @@
 package tamagotchi.view.animation.motion.settings;
 
-import tamagotchi.DataLoader;
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.data.DataLoaderService;
+import tamagotchi.data.PropertiesAccessPoint;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -49,7 +49,7 @@ public class MotionAnimationSettings {
     }
 
     public void initByJson(String path) throws IOException {
-        Collection<Object> data = DataLoader.getDataFromJson(path).values();
+        Collection<Object> data = DataLoaderService.getDataFromJson(path).values();
         data.forEach(item -> putMotionAnimationSetting(toMotionAnimationSetting((Map) item)));
     }
 }

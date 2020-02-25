@@ -1,13 +1,11 @@
 package tamagotchi.controller.commands;
 
 import javafx.event.ActionEvent;
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.controller.Controller;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
-import tamagotchi.controller.timer.GameTimer;
 import tamagotchi.controller.timer.GameTimers;
-import tamagotchi.controller.timer.tasks.UpdateTimerTask;
 import tamagotchi.model.pet.Occupation;
 import tamagotchi.view.animation.sprite.SpriteAnimation;
 import tamagotchi.view.animation.sprite.settings.SpriteAnimationSettings;

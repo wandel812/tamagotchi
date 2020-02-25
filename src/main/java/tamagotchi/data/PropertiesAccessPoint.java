@@ -1,4 +1,4 @@
-package tamagotchi;
+package tamagotchi.data;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -17,7 +17,7 @@ public class PropertiesAccessPoint {
     private static Properties initProp(String path) {
         Properties properties = null;
         try {
-            properties = DataLoader.getDataFromProperties(path);
+            properties = DataLoaderService.getDataFromProperties(path);
         } catch (IOException e) {
             e.printStackTrace();
         }

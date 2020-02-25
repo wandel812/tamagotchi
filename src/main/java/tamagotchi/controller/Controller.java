@@ -2,32 +2,36 @@ package tamagotchi.controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.geometry.Point2D;
 import javafx.stage.WindowEvent;
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.controller.game.GameService;
+import tamagotchi.controller.timer.GameTimers;
+import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.controller.commands.*;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
-import tamagotchi.controller.timer.GameTimers;
-import tamagotchi.controller.timer.tasks.GeneralPetStateUpdateTimerTask;
+import tamagotchi.data.saving.AppStateDto;
+import tamagotchi.data.saving.SavingLoadingService;
 import tamagotchi.model.pet.Occupation;
-import tamagotchi.view.Content;
+import tamagotchi.view.stage.PetChoosingStage;
 import tamagotchi.view.ProgressBarProperties;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Timer;
 
 public class Controller {
-    private static Timer timer;
     private static Queue<Command> commandQueue;
     private static boolean isGameRestarted = false;
     private static boolean isInCommandCycle = false;
     private static final int QUEUE_SIZE = 1;
 
     public static void init() {
-        timer = new Timer();
         commandQueue = new LinkedList<>();
     }
 
@@ -59,7 +63,6 @@ public class Controller {
     public static final EventHandler<ActionEvent> petButtonHandler = actionEvent -> {
         if (isPetInteractionActive()) {
             commandQueue.offer(new PetCommand());
-            ModelContainer.getPetInstance().communicationUpdate();
             ProgressBarProperties.setCommunication(ModelContainer.getPetInstance().getCommunication());
         }
     };
@@ -67,55 +70,79 @@ public class Controller {
     public static final EventHandler<ActionEvent> feedButtonHandler = actionEvent -> {
         if (isPetInteractionActive()) {
             commandQueue.offer(new FeedCommand());
-            ModelContainer.getPetInstance().hungrinessUpdate();
             ProgressBarProperties.setHungriness(ModelContainer.getPetInstance().getHungriness());
         }
     };
 
     public static final EventHandler<ActionEvent> continueGameButtonHandler = actionEvent -> {
-        ViewContainer.getContinueGameButton().setDisable(true);
-        /*TODO*/
+        Path path = Paths.get(PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
+        if (Files.exists(path)) {
+            ViewContainer.getContinueGameButton().setDisable(true);
+            AppStateDto appStateDto = SavingLoadingService.loadFromFile(path.toFile());
+            if (appStateDto.getPet().isDead()) {
+                ViewContainer.getStatusLabel().setText("Your pet is dead =(");
+            } else {
+                GameService.initModelContainer(appStateDto.getPet().getName());
+                GameService.changePetModel(appStateDto.getPet());
+                GameService.initGameTimers(appStateDto.getGrowingUpDelayTimer());
+                GameService.initProgressBars();
+                ModelContainer.getPetViewInstance().setPetPosition(
+                        new Point2D(appStateDto.getPetPositionX(), appStateDto.getMealPositionY()));
+                ModelContainer.getMealViewInstance().setMealPosition(
+                        new Point2D(appStateDto.getMealPositionX(), appStateDto.getMealPositionY()));
+                ModelContainer.changeCharacterTextureRegardingAge();
+                Controller.setIsGameRestarted(appStateDto.isGameRestarted());
+                Controller.setIsInCommandCycle(appStateDto.isInCommandCycle());
+                controlCommandExecution(null);
+            }
+        }
     };
 
     public static final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
-        ViewContainer.getContinueGameButton().setDisable(true);
-
-        if (isInCommandCycle) {
-            isGameRestarted = true;
-            ViewContainer.getGameArea().getChildren().remove(
-                    ModelContainer.getPetViewInstance().getPetAnimation().getTexture());
-            ViewContainer.getGameArea().getChildren().remove(
-                    ModelContainer.getMealViewInstance().getMealAnimation().getTexture());
-        }
-
-        Stage stage = new Stage();
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(ViewContainer.getRootStage());
-        stage.setResizable(false);
-        stage.setOnCloseRequest((WindowEvent event) -> ViewContainer.getContinueGameButton().setDisable(false));
-        stage.setScene(Content.createPetChoosingScene(stage));
-        stage.show();
+        PetChoosingStage.showPetChoosingStage(ViewContainer.getRootStage());
     };
 
-    public static void gameStop() {
-        timer.cancel();
-        timer.purge();
+    public static final EventHandler<WindowEvent> onClosed = windowEvent -> {
+        if (Controller.isInCommandCycle()) {
+            Path path = Paths.get(PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
+            try {
+                Files.deleteIfExists(path);
+                File file = Files.createFile(path).toFile();
+                SavingLoadingService.saveToFle(
+                        file,
+                        new AppStateDto(
+                                ModelContainer.getPetInstance(),
+                                ModelContainer.getMealViewInstance().getMealPosition().getX(),
+                                ModelContainer.getMealViewInstance().getMealPosition().getY(),
+                                ModelContainer.getPetViewInstance().getPetPosition().getX(),
+                                ModelContainer.getPetViewInstance().getPetPosition().getY(),
+                                Controller.isGameRestarted(),
+                                Controller.isInCommandCycle(),
+                                Calendar.getInstance().getTimeInMillis()
+                                        - GameTimers.getInstance().getPetGrowingUpGameTimer()
+                                        .getLastTaskStartDate().getTime()
+                        ));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        GameService.stopGame();
+    };
+
+    public static boolean isGameRestarted() {
+        return isGameRestarted;
     }
 
-    public static void initGame(String petName) {
-        ModelContainer.init(petName);
-        ViewContainer.getGameArea().getChildren().addAll(
-                ModelContainer.getPetViewInstance().getPetAnimation().getTexture(),
-                ModelContainer.getMealViewInstance().getMealAnimation().getTexture());
-        ViewContainer.getStatusLabel().setText(ModelContainer.getPetInstance()
-                .getCurrentOccupation().getStatusMessage());
-        GameTimers.getInstance().getGeneralPetStateUpdateGameTimer().startTimer(
-                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan")),
-                Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("tickSpan"))
-        );
-        ProgressBarProperties.setCommunication(ModelContainer.getPetInstance().getCommunication());
-        ProgressBarProperties.setHungriness(ModelContainer.getPetInstance().getHungriness());
-        ProgressBarProperties.setTiredness(ModelContainer.getPetInstance().getTiredness());
-        controlCommandExecution(null);
+    public static void setIsGameRestarted(boolean isGameRestarted) {
+        Controller.isGameRestarted = isGameRestarted;
+    }
+
+    public static boolean isInCommandCycle() {
+        return isInCommandCycle;
+    }
+
+    private static void setIsInCommandCycle(boolean isInCommandCycle) {
+        Controller.isInCommandCycle = isInCommandCycle;
     }
 }

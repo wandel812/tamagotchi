@@ -7,8 +7,10 @@ import javafx.util.Duration;
 import tamagotchi.view.animation.TransitionWithTexture;
 import tamagotchi.view.animation.sprite.settings.SpriteAnimationSetting;
 
-public class SpriteAnimation extends TransitionWithTexture {
- //   private final String spriteImgPath;
+import java.io.Serializable;
+
+public class SpriteAnimation extends TransitionWithTexture implements Serializable {
+    private static final long serialVersionUID = -1657514504284545705L;
     public int frameCnt;
     public int offsetX;
     public int offsetY;

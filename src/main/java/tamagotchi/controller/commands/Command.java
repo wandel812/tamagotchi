@@ -1,6 +1,6 @@
 package tamagotchi.controller.commands;
 
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.view.animation.motion.MotionAnimation;
 
 public abstract class Command {

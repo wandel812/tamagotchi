@@ -23,84 +23,111 @@ public class ViewContainer {
     private ViewContainer() {
     }
 
-    public static void init(Stage rootStage, BorderPane rootPane, Pane gameArea,
-                     Button petButton, Button feedButton, Button newGameButton, Button continueGameButton,
-                     ProgressBar hungrinessBar, ProgressBar tirednessBar,
-                     ProgressBar communicationBar, Label statusLabel) {
-        ViewContainer.rootStage = rootStage;
-        ViewContainer.rootPane = rootPane;
-        ViewContainer.gameArea = gameArea;
-        ViewContainer.petButton = petButton;
-        ViewContainer.feedButton = feedButton;
-        ViewContainer.newGameButton = newGameButton;
-        ViewContainer.continueGameButton = continueGameButton;
-        ViewContainer.hungrinessBar = hungrinessBar;
-        ViewContainer.tirednessBar = tirednessBar;
-        ViewContainer.communicationBar = communicationBar;
-        ViewContainer.statusLabel = statusLabel;
-    }
-
-    private static void checkInitialization() {
-        if (rootStage == null) {
+    private static void checkInitialization(Object o) {
+        if (o == null) {
             throw new RuntimeException("ViewContainer is not initialized");
         }
     }
 
     public static Stage getRootStage() {
-        checkInitialization();
+        checkInitialization(rootStage);
         return rootStage;
     }
 
     public static BorderPane getRootPane() {
-        checkInitialization();
+        checkInitialization(rootPane);
         return rootPane;
     }
 
     public static Pane getGameArea() {
-        checkInitialization();
+        checkInitialization(gameArea);
         return gameArea;
     }
 
     public static Button getPetButton() {
-        checkInitialization();
+        checkInitialization(petButton);
         return petButton;
     }
 
     public static Button getFeedButton() {
-        checkInitialization();
+        checkInitialization(feedButton);
         return feedButton;
     }
 
 
     public static Button getNewGameButton() {
-        checkInitialization();
+        checkInitialization(newGameButton);
         return newGameButton;
     }
 
     public static Button getContinueGameButton() {
-        checkInitialization();
+        checkInitialization(continueGameButton);
         return continueGameButton;
     }
 
 
     public static ProgressBar getHungrinessBar() {
-        checkInitialization();
+        checkInitialization(hungrinessBar);
         return hungrinessBar;
     }
 
 
     public static ProgressBar getTirednessBar() {
-        checkInitialization();
+        checkInitialization(tirednessBar);
         return tirednessBar;
     }
 
     public static ProgressBar getCommunicationBar() {
-        checkInitialization();
+        checkInitialization(communicationBar);
         return communicationBar;
     }
 
     public static Label getStatusLabel() {
-        checkInitialization();
+        checkInitialization(statusLabel);
         return statusLabel;
+    }
+
+    public static void setRootStage(Stage rootStage) {
+        ViewContainer.rootStage = rootStage;
+    }
+
+    public static void setRootPane(BorderPane rootPane) {
+        ViewContainer.rootPane = rootPane;
+    }
+
+    public static void setGameArea(Pane gameArea) {
+        ViewContainer.gameArea = gameArea;
+    }
+
+    public static void setPetButton(Button petButton) {
+        ViewContainer.petButton = petButton;
+    }
+
+    public static void setFeedButton(Button feedButton) {
+        ViewContainer.feedButton = feedButton;
+    }
+
+    public static void setNewGameButton(Button newGameButton) {
+        ViewContainer.newGameButton = newGameButton;
+    }
+
+    public static void setContinueGameButton(Button continueGameButton) {
+        ViewContainer.continueGameButton = continueGameButton;
+    }
+
+    public static void setHungrinessBar(ProgressBar hungrinessBar) {
+        ViewContainer.hungrinessBar = hungrinessBar;
+    }
+
+    public static void setTirednessBar(ProgressBar tirednessBar) {
+        ViewContainer.tirednessBar = tirednessBar;
+    }
+
+    public static void setCommunicationBar(ProgressBar communicationBar) {
+        ViewContainer.communicationBar = communicationBar;
+    }
+
+    public static void setStatusLabel(Label statusLabel) {
+        ViewContainer.statusLabel = statusLabel;
     }
 }

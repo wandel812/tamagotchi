@@ -2,8 +2,7 @@ package tamagotchi.controller.containers;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import tamagotchi.PropertiesAccessPoint;
+import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.model.meal.Meal;
 import tamagotchi.model.meal.MealView;
 import tamagotchi.model.pet.Pet;
@@ -67,8 +66,8 @@ public class ModelContainer {
                             SpriteAnimationSettings.getAnimationSettingsInstance()
                                     .getSpriteAnimationSetting("walk")),
                     new Point2D(
-                            Integer.parseInt(PropertiesAccessPoint.applicationSettings.getProperty("width")) / 2,
-                            Integer.parseInt(PropertiesAccessPoint.applicationSettings.getProperty("height")) / 2));
+                            Integer.parseInt(PropertiesAccessPoint.applicationSettings.getProperty("width")) / 2.0,
+                            Integer.parseInt(PropertiesAccessPoint.applicationSettings.getProperty("height")) / 2.0));
         } else {
             petView.getPetAnimation().setOtherAnimation(SpriteAnimationSettings.getAnimationSettingsInstance()
                     .getSpriteAnimationSetting("walk"));
@@ -100,6 +99,10 @@ public class ModelContainer {
     public static String getCharacterTexturePath() {
         return pet.isAdult() ? PetSettings.getPetSettingsInstance().getPetSetting(pet.getName()).getAdultTexturePath()
                 : PetSettings.getPetSettingsInstance().getPetSetting(pet.getName()).getYoungTexturePath();
+    }
+
+    public static void changeCharacterTextureRegardingAge() {
+        petView.getPetAnimation().getTexture().setImage(new Image(getCharacterTexturePath()));
     }
 
     public static String getMealTexturePath() {

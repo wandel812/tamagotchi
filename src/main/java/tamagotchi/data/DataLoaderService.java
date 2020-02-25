@@ -1,4 +1,4 @@
-package tamagotchi;
+package tamagotchi.data;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
 
-public class DataLoader {
+public class DataLoaderService {
     public static Map getDataFromJson(String path) throws IOException {
         Path inputPath = Paths.get(path);
         Reader in = Files.newBufferedReader(inputPath);

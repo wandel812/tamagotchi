@@ -24,14 +24,5 @@
     "adultTexturePath":"sprites/characters/Luk-A.png",
     "mealName":"Carrot",
     "mealTexturePath":"sprites/meal/meal.png"
-  },
-
-  "Bill":
-  {
-    "petName":"Bill",
-    "youngTexturePath":"sprites/characters/Bill-J.png",
-    "adultTexturePath":"sprites/characters/Bill-A.png",
-    "mealName":"Cake",
-    "mealTexturePath":"sprites/meal/meal.png"
   }
 }
