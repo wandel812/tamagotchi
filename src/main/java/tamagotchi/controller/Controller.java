@@ -105,12 +105,16 @@ public class Controller {
     public static final EventHandler<WindowEvent> onClosed = windowEvent -> {
         if (Controller.isInCommandCycle()) {
             try {
-                File file = ResourceUtils.getFile("classpath:"
+                File file = ResourceUtils.getFile(""
                         + PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
                 if (file.exists()) {
                     file.delete();
                     file.createNewFile();
                 }
+                long growingUpDelayTimer
+                        = Long.parseLong(PropertiesAccessPoint.petBehaviorSettings.getProperty("growingUpSpan"))
+                        + GameTimers.getInstance().getPetGrowingUpGameTimer().getLastTaskStartDate().getTime()
+                        - Calendar.getInstance().getTimeInMillis();
                 SavingLoadingService.saveToFle(
                         file,
                         new AppStateDto(
@@ -121,9 +125,7 @@ public class Controller {
                                 ModelContainer.getPetViewInstance().getPetPosition().getY(),
                                 Controller.isGameRestarted(),
                                 Controller.isInCommandCycle(),
-                                Calendar.getInstance().getTimeInMillis()
-                                        - GameTimers.getInstance().getPetGrowingUpGameTimer()
-                                        .getLastTaskStartDate().getTime()
+                                Math.max(growingUpDelayTimer, 0)
                         ));
 
             } catch (IOException e) {

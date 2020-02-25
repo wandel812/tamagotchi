@@ -10,14 +10,6 @@ public class PropertiesAccessPoint {
     public static final Properties petBehaviorSettings;
 
     static {
-/*        applicationSettings = PropertiesAccessPoint.initProp(
-                PropertiesAccessPoint.class.
-                        getResourceAsStream("/settings/applicationSettings.properties")
-        );
-        petBehaviorSettings = PropertiesAccessPoint.initProp(
-                PropertiesAccessPoint.class.
-                        getResourceAsStream("/settings/petBehaviorSettings.properties")
-        );*/
         applicationSettings = PropertiesAccessPoint.initProp("/settings/applicationSettings.properties");
         petBehaviorSettings = PropertiesAccessPoint.initProp("/settings/petBehaviorSettings.properties");
     }
@@ -29,7 +21,5 @@ public class PropertiesAccessPoint {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return properties;
-
-    }
+        return properties;    }
 }
