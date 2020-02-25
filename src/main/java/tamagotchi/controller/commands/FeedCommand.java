@@ -1,11 +1,11 @@
 package tamagotchi.controller.commands;
 
 import javafx.geometry.Point2D;
+import tamagotchi.controller.Controller;
 import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
 import tamagotchi.view.animation.sprite.SpriteAnimation;
 import tamagotchi.view.animation.sprite.settings.SpriteAnimationSettings;
-import tamagotchi.controller.Controller;
 
 public class FeedCommand extends Command {
     public FeedCommand() {

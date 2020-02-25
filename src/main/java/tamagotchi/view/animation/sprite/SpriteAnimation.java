@@ -36,17 +36,17 @@ public class SpriteAnimation extends TransitionWithTexture implements Serializab
                 double step = 1.0 / frameCnt;
                 double result = (double) frameCnt / 10.0;
                 for (int n = 1; n <= frameCnt; n++) {
-                    if (t <= n * step ) {
+                    if (t <= n * step) {
                         result = (double) (n - 1) / 10.0;
                         break;
                     }
                 }
-                return  result;
+                return result;
             }
         });
     }
 
-    public SpriteAnimation (String spriteImgPath, SpriteAnimationSetting spriteAnimationSetting) {
+    public SpriteAnimation(String spriteImgPath, SpriteAnimationSetting spriteAnimationSetting) {
         this(
                 spriteImgPath,
                 spriteAnimationSetting.getDurationInMillis(),
@@ -64,7 +64,7 @@ public class SpriteAnimation extends TransitionWithTexture implements Serializab
         offsetY = spriteAnimationSetting.getOffsetY();
         width = spriteAnimationSetting.getWidth();
         height = spriteAnimationSetting.getHeight();
-        durationInMillis =  spriteAnimationSetting.getDurationInMillis();
+        durationInMillis = spriteAnimationSetting.getDurationInMillis();
         setCycleDuration(new Duration(durationInMillis));
     }
 

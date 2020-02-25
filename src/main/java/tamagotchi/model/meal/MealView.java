@@ -3,8 +3,6 @@ package tamagotchi.model.meal;
 import javafx.geometry.Point2D;
 import tamagotchi.view.animation.sprite.SpriteAnimation;
 
-import java.io.Serializable;
-
 public class MealView {
     private SpriteAnimation mealAnimation;
     private Point2D mealPosition;

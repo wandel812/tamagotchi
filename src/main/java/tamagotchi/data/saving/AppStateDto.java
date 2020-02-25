@@ -12,7 +12,7 @@ public class AppStateDto implements Serializable {
     private double petPositionX;
     private double petPositionY;
     private long growingUpDelayTimer;
-    private boolean isGameRestarted ;
+    private boolean isGameRestarted;
     private boolean isInCommandCycle;
 
 

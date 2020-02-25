@@ -4,7 +4,9 @@ import tamagotchi.data.DataLoaderService;
 import tamagotchi.data.PropertiesAccessPoint;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpriteAnimationSettings {
     private Map<String, SpriteAnimationSetting> animationSettingMap;

@@ -1,200 +1,164 @@
 {
-  "sleep":
-  {
-    "animationName":"sleep",
-    "count":2,
-    "offsetX":472,
-    "offsetY":125,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "sleep": {
+    "animationName": "sleep",
+    "count": 2,
+    "offsetX": 472,
+    "offsetY": 125,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "die":
-  {
-    "animationName":"die",
-    "count":2,
-    "offsetX":141,
-    "offsetY":243,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "die": {
+    "animationName": "die",
+    "count": 2,
+    "offsetX": 141,
+    "offsetY": 243,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "walkAround":
-  {
-    "animationName":"walk",
-    "count":3,
-    "offsetX":6,
-    "offsetY":82,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "walkAround": {
+    "animationName": "walk",
+    "count": 3,
+    "offsetX": 6,
+    "offsetY": 82,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "beSad":
-  {
-    "animationName":"beSad",
-    "count":2,
-    "offsetX":280,
-    "offsetY":202,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "beSad": {
+    "animationName": "beSad",
+    "count": 2,
+    "offsetX": 280,
+    "offsetY": 202,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "beHungry":
-  {
-    "animationName":"beHungry",
-    "count":2,
-    "offsetX":279,
-    "offsetY":123,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "beHungry": {
+    "animationName": "beHungry",
+    "count": 2,
+    "offsetX": 279,
+    "offsetY": 123,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "eat":
-  {
-    "animationName":"eat",
-    "count":2,
-    "offsetX":376,
-    "offsetY":163,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "eat": {
+    "animationName": "eat",
+    "count": 2,
+    "offsetX": 376,
+    "offsetY": 163,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "beHappy":
-  {
-    "animationName":"beHappy",
-    "count":2,
-    "offsetX":145,
-    "offsetY":82,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "beHappy": {
+    "animationName": "beHappy",
+    "count": 2,
+    "offsetX": 145,
+    "offsetY": 82,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "beTired":
-  {
-    "animationName":"beTired",
-    "count":2,
-    "offsetX":279,
-    "offsetY":42,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "beTired": {
+    "animationName": "beTired",
+    "count": 2,
+    "offsetX": 279,
+    "offsetY": 42,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-
-  "jump":
-  {
-    "animationName":"jump",
-    "count":2,
-    "offsetX":145,
-    "offsetY":124,
-    "width":40,
-    "height":40,
-    "durationInMillis":2000.0
+  "jump": {
+    "animationName": "jump",
+    "count": 2,
+    "offsetX": 145,
+    "offsetY": 124,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2000.0
   },
-
-  "beStill":
-  {
-    "animationName":"beStill",
-    "count":2,
-    "offsetX":9,
-    "offsetY":43,
-    "width":40,
-    "height":40,
-    "durationInMillis":1000.0
+  "beStill": {
+    "animationName": "beStill",
+    "count": 2,
+    "offsetX": 9,
+    "offsetY": 43,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 1000.0
   },
-
-  "beAngry":
-  {
-    "animationName":"beAngry",
-    "count":2,
-    "offsetX":280,
-    "offsetY":241,
-    "width":40,
-    "height":40,
-    "durationInMillis":2500.0
+  "beAngry": {
+    "animationName": "beAngry",
+    "count": 2,
+    "offsetX": 280,
+    "offsetY": 241,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2500.0
   },
-
-  "goToBetterPlace":
-  {
-    "animationName":"goToBetterPlace",
-    "count":1,
-    "offsetX":510,
-    "offsetY":324,
-    "width":40,
-    "height":40,
-    "durationInMillis":2000.0
+  "goToBetterPlace": {
+    "animationName": "goToBetterPlace",
+    "count": 1,
+    "offsetX": 510,
+    "offsetY": 324,
+    "width": 40,
+    "height": 40,
+    "durationInMillis": 2000.0
   },
-
-  "bread":
-  {
-    "animationName":"bread",
-    "count":1,
-    "offsetX":23,
-    "offsetY":9,
-    "width":24,
-    "height":27,
-    "durationInMillis":20000.0
+  "bread": {
+    "animationName": "bread",
+    "count": 1,
+    "offsetX": 23,
+    "offsetY": 9,
+    "width": 24,
+    "height": 27,
+    "durationInMillis": 20000.0
   },
-
-  "meat":
-  {
-    "animationName":"meat",
-    "count":1,
-    "offsetX":70,
-    "offsetY":5,
-    "width":24,
-    "height":26,
-    "durationInMillis":20000.0
+  "meat": {
+    "animationName": "meat",
+    "count": 1,
+    "offsetX": 70,
+    "offsetY": 5,
+    "width": 24,
+    "height": 26,
+    "durationInMillis": 20000.0
   },
-
-  "carrot":
-  {
-    "animationName":"carrot",
-    "count":1,
-    "offsetX":119,
-    "offsetY":6,
-    "width":27,
-    "height":34,
-    "durationInMillis":20000.0
+  "carrot": {
+    "animationName": "carrot",
+    "count": 1,
+    "offsetX": 119,
+    "offsetY": 6,
+    "width": 27,
+    "height": 34,
+    "durationInMillis": 20000.0
   },
-
-  "iceCream":
-  {
-    "animationName":"iceCream",
-    "count":1,
-    "offsetX":23,
-    "offsetY":58,
-    "width":27,
-    "height":34,
-    "durationInMillis":20000.0
+  "iceCream": {
+    "animationName": "iceCream",
+    "count": 1,
+    "offsetX": 23,
+    "offsetY": 58,
+    "width": 27,
+    "height": 34,
+    "durationInMillis": 20000.0
   },
-
-  "cake":
-  {
-    "animationName":"cake",
-    "count":1,
-    "offsetX":71,
-    "offsetY":62,
-    "width":27,
-    "height":34,
-    "durationInMillis":20000.0
+  "cake": {
+    "animationName": "cake",
+    "count": 1,
+    "offsetX": 71,
+    "offsetY": 62,
+    "width": 27,
+    "height": 34,
+    "durationInMillis": 20000.0
   },
-
-  "blank":
-  {
-    "animationName":"blank",
-    "count":1,
-    "offsetX":158,
-    "offsetY":117,
-    "width":27,
-    "height":34,
-    "durationInMillis":20000.0
+  "blank": {
+    "animationName": "blank",
+    "count": 1,
+    "offsetX": 158,
+    "offsetY": 117,
+    "width": 27,
+    "height": 34,
+    "durationInMillis": 20000.0
   }
 }

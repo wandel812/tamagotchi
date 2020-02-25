@@ -12,8 +12,6 @@ import tamagotchi.controller.Controller;
 import tamagotchi.controller.containers.ViewContainer;
 import tamagotchi.data.PropertiesAccessPoint;
 
-import javax.swing.text.View;
-
 public class TopBox {
     private static HBox createLabelBox() {
         HBox labelBox = new HBox();
@@ -53,12 +51,12 @@ public class TopBox {
 
     public static HBox createTopBox() {
         HBox topBox = new HBox();
-        topBox.getChildren().addAll( createGameCtrlButtonBox(), createPetBehaviorButtonBox(), createLabelBox());
+        topBox.getChildren().addAll(createGameCtrlButtonBox(), createPetBehaviorButtonBox(), createLabelBox());
         topBox.setSpacing(16);
         topBox.setBackground(new Background(
                 new BackgroundFill(Color.web(PropertiesAccessPoint.applicationSettings.getProperty("boxColor")),
                         CornerRadii.EMPTY, Insets.EMPTY)));
-        topBox.setPadding(new Insets(0,0,5,0));
+        topBox.setPadding(new Insets(0, 0, 5, 0));
         topBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null,
                 new BorderWidths(1))));
         return topBox;

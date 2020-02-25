@@ -1,7 +1,6 @@
 package tamagotchi.view.animation;
 
 import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 

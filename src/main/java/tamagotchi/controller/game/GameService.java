@@ -19,6 +19,7 @@ public class GameService {
         initProgressBars();
         Controller.controlCommandExecution(null);
     }
+
     public static void initGameTimers(long growingUpDelay) {
         if (Controller.isGameRestarted()) {
             GameTimers.getInstance().init();
@@ -29,6 +30,7 @@ public class GameService {
         );
         GameTimers.getInstance().getPetGrowingUpGameTimer().startTimer(growingUpDelay);
     }
+
     public static void initGameTimers() {
         initGameTimers(Integer.parseInt(PropertiesAccessPoint.petBehaviorSettings.getProperty("growingUpSpan")));
     }
