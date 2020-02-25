@@ -105,12 +105,12 @@ public class Controller {
     public static final EventHandler<WindowEvent> onClosed = windowEvent -> {
         if (Controller.isInCommandCycle()) {
             try {
-                File file = ResourceUtils.getFile(""
-                        + PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
+                File file = ResourceUtils.getFile(
+                        PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
                 if (file.exists()) {
                     file.delete();
-                    file.createNewFile();
                 }
+                file.createNewFile();
                 long growingUpDelayTimer
                         = Long.parseLong(PropertiesAccessPoint.petBehaviorSettings.getProperty("growingUpSpan"))
                         + GameTimers.getInstance().getPetGrowingUpGameTimer().getLastTaskStartDate().getTime()
