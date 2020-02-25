@@ -1,6 +1,7 @@
 package tamagotchi.data;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesAccessPoint {
@@ -9,15 +10,20 @@ public class PropertiesAccessPoint {
 
     static {
         applicationSettings = PropertiesAccessPoint.initProp(
-                "src/main/resources/settings/applicationSettings.properties");
+                PropertiesAccessPoint.class.
+                        getResourceAsStream("/settings/applicationSettings.properties")
+        );
         petBehaviorSettings = PropertiesAccessPoint.initProp(
-                "src/main/resources/settings/petBehaviorSettings.properties");
+                PropertiesAccessPoint.class.
+                        getResourceAsStream("/settings/petBehaviorSettings.properties")
+        );
     }
 
-    private static Properties initProp(String path) {
+    private static Properties initProp(InputStream is) {
         Properties properties = null;
         try {
-            properties = DataLoaderService.getDataFromProperties(path);
+            properties = DataLoaderService.getDataFromProperties(is);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

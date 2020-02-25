@@ -9,6 +9,7 @@ import tamagotchi.controller.containers.ModelContainer;
 import tamagotchi.controller.containers.ViewContainer;
 import tamagotchi.controller.game.GameService;
 import tamagotchi.controller.timer.GameTimers;
+import tamagotchi.data.DataLoaderService;
 import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.data.saving.AppStateDto;
 import tamagotchi.data.saving.SavingLoadingService;
@@ -18,6 +19,7 @@ import tamagotchi.view.stage.PetChoosingStage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -98,14 +100,14 @@ public class Controller {
         }
     };
 
-    public static final EventHandler<ActionEvent> newGameButtonHandler = actionEvent -> {
-        PetChoosingStage.showPetChoosingStage(ViewContainer.getRootStage());
-    };
+    public static final EventHandler<ActionEvent> newGameButtonHandler
+            = actionEvent -> PetChoosingStage.showPetChoosingStage(ViewContainer.getRootStage());
 
     public static final EventHandler<WindowEvent> onClosed = windowEvent -> {
         if (Controller.isInCommandCycle()) {
-            Path path = Paths.get(PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile"));
             try {
+                Path path = Paths.get(DataLoaderService.class.getResource(
+                        PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSaveFile")).toURI());
                 Files.deleteIfExists(path);
                 File file = Files.createFile(path).toFile();
                 SavingLoadingService.saveToFle(
@@ -123,7 +125,7 @@ public class Controller {
                                         .getLastTaskStartDate().getTime()
                         ));
 
-            } catch (IOException e) {
+            } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
         }

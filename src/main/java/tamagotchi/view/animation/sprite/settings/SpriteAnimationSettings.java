@@ -4,6 +4,7 @@ import tamagotchi.data.DataLoaderService;
 import tamagotchi.data.PropertiesAccessPoint;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,8 @@ public class SpriteAnimationSettings {
                         PropertiesAccessPoint.applicationSettings.getProperty("spriteAnimationSettingsPath")
                 );
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
         }
@@ -54,7 +57,7 @@ public class SpriteAnimationSettings {
                 offsetY.intValue(), width.intValue(), height.intValue(), duration);
     }
 
-    public void initByJson(String path) throws IOException {
+    public void initByJson(String path) throws IOException, URISyntaxException {
         Collection<Object> data = DataLoaderService.getDataFromJson(path).values();
         data.forEach(item -> putSpriteAnimationSetting(toSpriteAnimationSetting((Map) item)));
     }

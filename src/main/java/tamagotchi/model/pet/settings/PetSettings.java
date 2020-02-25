@@ -5,6 +5,7 @@ import tamagotchi.data.PropertiesAccessPoint;
 import tamagotchi.model.meal.MealType;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class PetSettings {
                 petSettings.initByJson(
                         PropertiesAccessPoint.applicationSettings.getProperty("petCharacterSettingsPath")
                 );
-            } catch (IOException e) {
+            } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
         }
@@ -54,7 +55,7 @@ public class PetSettings {
         return new PetSetting(petName, mealType, youngTexturePath, adultTexturePath, mealTexturePath);
     }
 
-    public void initByJson(String path) throws IOException {
+    public void initByJson(String path) throws IOException, URISyntaxException {
         Collection<Object> data = DataLoaderService.getDataFromJson(path).values();
         data.forEach(item -> putPetSetting(toPetSetting((Map) item)));
     }

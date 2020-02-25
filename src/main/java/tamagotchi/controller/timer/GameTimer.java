@@ -32,14 +32,11 @@ public class GameTimer {
         timer.schedule(timerTask, delay);
     }
 
-    public long stopTimer() {
-        long remainDurationInMillis
-                = this.timerTask.getLastTaskStartDate().getTime() - Calendar.getInstance().getTime().getTime();
+    public void stopTimer() {
         timer.cancel();
         timer.purge();
         isActive = false;
         timerTask = new PetSleepingUpdateTimerTask();
-        return remainDurationInMillis;
 
     }
 

@@ -4,6 +4,7 @@ import tamagotchi.data.DataLoaderService;
 import tamagotchi.data.PropertiesAccessPoint;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,8 @@ public class MotionAnimationSettings {
                         PropertiesAccessPoint.applicationSettings.getProperty("motionAnimationSettingsPath")
                 );
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
         }
@@ -48,7 +51,7 @@ public class MotionAnimationSettings {
         return new MotionAnimationSetting(motionName, duration);
     }
 
-    public void initByJson(String path) throws IOException {
+    public void initByJson(String path) throws IOException, URISyntaxException {
         Collection<Object> data = DataLoaderService.getDataFromJson(path).values();
         data.forEach(item -> putMotionAnimationSetting(toMotionAnimationSetting((Map) item)));
     }
