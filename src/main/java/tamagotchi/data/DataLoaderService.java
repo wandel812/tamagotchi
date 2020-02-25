@@ -16,6 +16,7 @@ public class DataLoaderService {
             Gson gson = new Gson();
             data = gson.fromJson(new JsonReader(in), Map.class);
         }
+        resource.close();
         return data;
     }
 
